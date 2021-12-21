@@ -1,0 +1,46 @@
+1. a method that returns the sum of two integers
+
+START
+
+PRINT "Enter the first number:"
+SET number1 = GET user input
+
+PRINT "Enter the second number:"
+SET number2 = GET user input
+
+result = number1 + number2
+
+PRINT result
+
+END
+
+
+
+2. a method that takes an array of strings, and returns a string that is all those strings concatenated together
+
+START
+
+SET concatenation = nil
+SET counter = 1
+
+while counter <= length of string array
+  concatenation = concatenation + value within string array at index "counter" 
+  counter = counter + 1
+
+END
+
+
+
+a method that takes an array of integers, and returns a new array with every other element
+
+START
+
+SET counter = 1
+SET new_array = []
+
+while counter <= length of integer array
+  IF counter is ODD
+    add value within integer array at index "counter" to array "new_array"
+  counter = counter + 1
+  
+END

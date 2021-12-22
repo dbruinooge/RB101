@@ -1,11 +1,20 @@
-# calculator refactored in lesson 2, assignment 11
+# Bonus features added in lesson 2-15
+
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
 
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
+# change number validation to allow 0
 def valid_number?(num)
-  num.to_i != 0
+  num.to_i != 0 || num == '0'
+end
+
+# possible number validation that includes decimals
+def number?(num)
+  num.to_i.to_s == num || num.to_f.to_s == num
 end
 
 def operator_to_message(op)
@@ -21,13 +30,13 @@ def operator_to_message(op)
   end
 end
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt(MESSAGES['welcome'])
 
 name = ''
 loop do
   name = Kernel.gets().chomp()
   if name.empty?
-    prompt("Make sure to use a valid name.")
+    prompt(MESSAGES['valid_name'])
   else
     break
   end
@@ -38,23 +47,23 @@ prompt("Hi #{name}!")
 loop do # main loop
   number1 = ''
   loop do
-    prompt("What's the first number?")
+    prompt(MESSAGES['first_number'])
     number1 = Kernel.gets().chomp()
     if valid_number?(number1)
       break
     else
-      prompt("Hmm... that doesn't look like a valid number")
+      prompt(MESSAGES['valid_number'])
     end
   end
 
   number2 = ''
   loop do
-    prompt("What's the second number?")
+    prompt(MESSAGES['second_number'])
     number2 = Kernel.gets().chomp()
     if valid_number?(number2)
       break
     else
-      prompt("Hmm... that doesn't look like a valid number")
+      prompt(MESSAGES['valid_number'])
     end
   end
 
@@ -75,7 +84,7 @@ loop do # main loop
     if %w(1 2 3 4).include?(operator)
       break
     else
-      prompt("Must choose 1, 2, 3 or 4")
+      prompt(MESSAGES['valid_operator'])
     end
   end
 
@@ -94,9 +103,18 @@ loop do # main loop
 
   prompt("The result is #{result}")
 
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
+  prompt(MESSAGES['again'])
   answer = Kernel.gets().chomp()
   break unless answer.downcase().start_with?('y')
 end
 
-prompt("Thank you for using the calculator. Good bye!")
+prompt(MESSAGES['bye'])
+
+
+# >> What if we needed to add some code after the case statement within the method? What changes would be needed to keep the method working with the rest of the program?
+
+# Depending on what kind of code was being added after the case statement, we could either add explicit "return"s before the return values in the case statement, or we could assign those values to a variable and return the variable at the end of the method (after the added code, if necessary).
+
+# >> You need to now internationalize the messages in your calculator. 
+
+# I would create separate yml files for each language, prompt the user at the start for their language preference, and then initialize the correct yml file accordingly.

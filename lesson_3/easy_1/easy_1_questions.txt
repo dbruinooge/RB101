@@ -1,0 +1,31 @@
+1. It will print:
+
+1
+2
+2
+3
+
+because numbers.uniq does not mutate the original object.
+
+2. As a Ruby convention, ! is often used at the end of a method name to indicate that the method mutates its caller.
+Also as a Ruby convention, ? is often used at the end of the name of a method that returns a boolean.
+? is also used in ternary expressions.
+
+  1. != means NOT and is used when you want an expression to evaluate to true when the expression following != evaluates to false or nil.
+  2. !user_name will evaluate to true if user_name is false or nil.
+  3. the ! in uniq! indicates that it is a mutating method. Therefore, words.uniq! will mutate the caller (words) by removing all non-unique values.
+  4. I can't find anything about this when googling. When i try it in IRB, ?a returns "a".
+  5. ? after something means, by convention, that the something returns a boolean.
+  6. !!user_name will return the truthiness of user_name. The exclamation marks effectively cancel out, as in "not not user_name".
+  
+3. <answer in easy_1_3.rb>
+
+4. The first deletes 2, located at index 1. The second deletes 1, located at index 0.
+
+5. <answer in easy_1_5.rb>
+
+6. <answer in easy_1_6.rb>
+
+7. <answer in easy_1_7.rb>
+
+8. <answer in easy_1_8.rb>

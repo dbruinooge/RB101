@@ -1,0 +1,3 @@
+This prints out BOB twice, on separate lines.
+When save_name is assigned to the value of name on line 2, both name and save_name are pointing to the same String object. That object is then mutated on line 3 by the String#upcase! method. 
+Thus, line 4 prints that same mutated object twice - "BOB" in this case.

@@ -1,0 +1,28 @@
+# PROBLEM:
+
+# Given a string, write a method `palindrome_substrings` which returns
+# all the substrings from a given string which are palindromes. Consider
+# palindrome words case sensitive.
+
+# Test cases:
+
+# palindrome_substrings("supercalifragilisticexpialidocious") == ["ili"]
+# palindrome_substrings("abcddcbA") == ["bcddcb", "cddc", "dd"]
+# palindrome_substrings("palindrome") == []
+# palindrome_substrings("") == []
+
+input: string
+output: array of strings
+
+rules:
+  explicit: every substring that is a palindrome should be returned
+            palindromes are case sensitive
+            palindrome = string that reads the same forward and backward
+  
+  implicit: we are looking for substrings, not words. blanks don't matter.
+            a palindrome can itself contain palindromes. both the outer and inner
+              palindromes should be returned as separate strings in the array.
+            when no palindrome is found, the returned array will be empty
+            when the string is empty, the returned array will be empty
+            can string contained spaces? If so, should spaces be considered characters
+              for determining if a substring is a palindrome?

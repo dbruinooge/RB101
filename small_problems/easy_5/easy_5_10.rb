@@ -11,10 +11,9 @@ def print_in_box(message)
   puts horizontal_rule
   puts empty_line
   
-  if message.kind_of?(Array)
+  if message.is_a?(Array)
     message.each do |line|
-      spaces = 1 + ((length - line.length) / 2)
-      puts "|#{" " * spaces}#{line}#{" " * (length - line.length - spaces + 2)}|"
+      puts "| #{line}#{" " * (length - line.length + 1)}|"
     end
   else
     puts "| #{message} |"
@@ -38,6 +37,7 @@ def word_wrap(message)
       position -= 1
     end
   end
+  message_array << wrapped_message
   message_array
 end
 
@@ -50,6 +50,10 @@ def max_length(message_array)
   end
   length
 end
+
+message = "Use the form below to add your solution or analysis for this exercise. You can include a link to a gist or pastebin, or write your entire solution right here. Make sure to use proper formatting so your code shows up correctly and preview your code first. You may include some commentary about your code and the tradeoffs you took, or some analysis about this exercise and its solutions. Make sure your solution fulfills all of the provided examples, if any, and doesn't contain any obvious errors."
+
+print_in_box(message)
 
 # def truncate(message)
 #   truncated_message = message.dup

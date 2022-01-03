@@ -120,7 +120,7 @@ def collect_bet(bankroll)
     break if (1..bankroll).include?(bet)
     puts "Invalid input."
   end
-  bet.to_i
+  bet
 end
 
 def settle_bet(winner, bankroll, bet)

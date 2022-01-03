@@ -91,21 +91,21 @@ end
 def computer_attacks(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(*line).count(COMPUTER_MARKER) == 2 &&
-      brd.values_at(*line).count(INITIAL_MARKER) == 1
+       brd.values_at(*line).count(INITIAL_MARKER) == 1
       line.each { |sq| return sq if brd[sq] == INITIAL_MARKER }
     end
   end
-  nil 
+  nil
 end
 
 def computer_defends(brd)
   WINNING_LINES.each do |line|
     if brd.values_at(*line).count(PLAYER_MARKER) == 2 &&
-      brd.values_at(*line).count(INITIAL_MARKER) == 1
+       brd.values_at(*line).count(INITIAL_MARKER) == 1
       line.each { |sq| return sq if brd[sq] == INITIAL_MARKER }
     end
   end
-  nil 
+  nil
 end
 
 def board_full?(brd)
@@ -119,9 +119,7 @@ end
 def detect_winner(brd)
   WINNING_LINES.each do |line|
     return 'Player' if line.all? { |sq| brd[sq] == PLAYER_MARKER }
-                  # if brd.values_at(*line).count(PLAYER_MARKER) == 3
     return 'Computer' if line.all? { |sq| brd[sq] == COMPUTER_MARKER }
-                    # if brd.values_at(*line).count(COMPUTER_MARKER) == 3
   end
   nil
 end
@@ -153,7 +151,7 @@ loop do
 
     break if someone_won?(board) || board_full?(board)
   end
-  
+
   display_board(board)
 
   if someone_won?(board)
@@ -162,10 +160,11 @@ loop do
   else
     prompt "It's a tie!"
   end
-  
+
   if score['Player'] == 5 || score['Computer'] == 5
     prompt "#{score.key(5)} wins the match!"
-    prompt "Final score: Player #{score['Player']}, Computer #{score['Computer']}"
+    prompt "Final score: Player #{score['Player']}, "\
+           "Computer #{score['Computer']}"
     prompt "Play another best-of-five match? (y or n)"
     answer = gets.chomp
     if answer.start_with?('y')
@@ -174,8 +173,9 @@ loop do
     end
     break
   end
-  
-  prompt "Current score: Player #{score['Player']}, Computer #{score['Computer']}"
+
+  prompt "Current score: Player #{score['Player']}, "\
+         "Computer #{score['Computer']}"
   prompt "Play again?"
   decision = gets.chomp
   break if !decision.start_with?('y')

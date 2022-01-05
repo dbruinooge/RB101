@@ -62,7 +62,6 @@ end
 
 def dealer_takes_turn!(deck, d_hand, p_hand)
   d_hand.delete_at(1)
-  return if busted?(p_hand)
   display_game_state(d_hand, p_hand)
   while total(d_hand) < DEALER_STANDS
     deal_card!(deck, d_hand)

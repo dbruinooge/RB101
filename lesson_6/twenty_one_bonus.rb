@@ -45,8 +45,8 @@ def hit?
   loop do
     puts "Hit? (y/n)"
     choice = gets.chomp.downcase
-    return true if choice == 'y'
-    return false if choice == 'n'
+    return true if ['y', 'yes'].include?(choice)
+    return false if ['n', 'no'].include?(choice)
     puts "Invalid input."
   end
 end
@@ -142,8 +142,8 @@ def again?(bankroll)
   loop do
     puts "Do you want to play again? (y/n)"
     choice = gets.chomp.downcase
-    return true if choice == 'y'
-    return false if choice == 'n'
+    return true if ['y', 'yes'].include?(choice)
+    return false if ['n', 'no'].include?(choice)
     puts "Invalid input."
   end
 end

@@ -1,11 +1,28 @@
+# Further exploration: non-recursive solution
+
 def merge_sort(array)
   return array if array.size <= 1
-  
-  middle = array.size / 2
-  left = array[0...middle]
-  right = array[middle..-1]
-  merge(merge_sort(left), merge_sort(right))
+  divided = divide(array)
+  while divided.size > 1
+    divided = divided.map.with_index do|ele, idx|
+      if idx == divided.size - 1 && divided.size.odd?
+        ele
+      elsif idx.even?
+        merge(ele, divided[idx + 1])
+      else
+        nil
+      end
+    end.select { |ele| ele != nil }
+  end
+  divided  
+end
 
+def divide(array)
+  results = []
+  array.each do |ele|
+    results << [ele]
+  end
+  results
 end
 
 def merge(arr1, arr2)
@@ -21,6 +38,4 @@ def merge(arr1, arr2)
   results.concat(arr2[idx2..-1])
 end
 
-array = [4, 2, 3, 1, 9, 12, 100, 30, 0, 6]
-
-p merge_sort(array)
+p merge_sort([5, 6, 78, 2, 3, 5])

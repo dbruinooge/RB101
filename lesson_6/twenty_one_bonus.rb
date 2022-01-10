@@ -30,19 +30,6 @@ def initialize_hand(deck)
   hand
 end
 
-# def initialize_player(deck)
-#   player_hand = []
-#   2.times { deal_card!(deck, player_hand) }
-#   player_hand
-# end
-
-# def initialize_dealer(deck)
-#   dealer_hand = []
-#   2.times { deal_card!(deck, dealer_hand) }
-#   dealer_hand.insert(-2, { value: "unknown card", suit: nil })
-#   dealer_hand
-# end
-
 def deal_card!(deck, hand)
   hand << deck.pop
 end

@@ -24,18 +24,24 @@ def initialize_deck
   end
 end
 
-def initialize_player(deck)
-  player_hand = []
-  2.times { deal_card!(deck, player_hand) }
-  player_hand
+def initialize_hand(deck)
+  hand = []
+  2.times { deal_card!(deck, hand) }
+  hand
 end
 
-def initialize_dealer(deck)
-  dealer_hand = []
-  2.times { deal_card!(deck, dealer_hand) }
-  dealer_hand.insert(-2, { value: "unknown card", suit: nil })
-  dealer_hand
-end
+# def initialize_player(deck)
+#   player_hand = []
+#   2.times { deal_card!(deck, player_hand) }
+#   player_hand
+# end
+
+# def initialize_dealer(deck)
+#   dealer_hand = []
+#   2.times { deal_card!(deck, dealer_hand) }
+#   dealer_hand.insert(-2, { value: "unknown card", suit: nil })
+#   dealer_hand
+# end
 
 def deal_card!(deck, hand)
   hand << deck.pop
@@ -52,36 +58,36 @@ def hit?
 end
 
 def player_takes_turn!(deck, d_hand, p_hand)
-  display_game_state(d_hand, p_hand)
+  display_game_state(d_hand, p_hand, 'Player')
   while hit?
     deal_card!(deck, p_hand)
-    display_game_state(d_hand, p_hand)
+    display_game_state(d_hand, p_hand, 'Player')
     break if busted?(p_hand)
   end
 end
 
 def dealer_takes_turn!(deck, d_hand, p_hand)
   d_hand.delete_at(1)
-  display_game_state(d_hand, p_hand)
+  display_game_state(d_hand, p_hand, 'Dealer')
   while total(d_hand) < DEALER_STANDS
     deal_card!(deck, d_hand)
-    display_game_state(d_hand, p_hand)
+    display_game_state(d_hand, p_hand, 'Dealer')
     puts "Dealer draws #{d_hand[-1][:value]}. Press ENTER to continue.."
     gets
   end
 end
 
-def display_game_state(d_hand, p_hand)
+def display_game_state(d_hand, p_hand, turn)
   system 'clear'
-  display_dealer(d_hand)
+  display_dealer(d_hand, turn)
   puts "-----------------------------------------"
   display_player(p_hand)
   puts "========================================="
 end
 
-def display_dealer(d_hand)
-  if d_hand.any? { |crd| crd[:value] == 'unknown card' }
-    puts "Dealer has: #{joinor(d_hand[0..1].map { |crd| crd[:value] })}"
+def display_dealer(d_hand, turn)
+  if turn == 'Player'
+    puts "Dealer has: #{d_hand[0][:value]} + ?"
     puts "Dealer total: #{CARD_VALUES[d_hand[0][:value]]} + ?"
   else
     puts "Dealer has: #{joinor(d_hand.map { |crd| crd[:value] })}"
@@ -174,8 +180,8 @@ puts "------------------------------------------------------"
 
 loop do
   deck = initialize_deck
-  player_hand = initialize_player(deck)
-  dealer_hand = initialize_dealer(deck)
+  player_hand = initialize_hand(deck)
+  dealer_hand = initialize_hand(deck)
 
   bet = collect_bet(bankroll)
   player_takes_turn!(deck, dealer_hand, player_hand)
